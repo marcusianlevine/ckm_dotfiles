@@ -68,7 +68,7 @@ Plugin 'SirVer/ultisnips'
 
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
-Plugin 'Shougo/neocomplete.vim'
+" Plugin 'Shougo/neocomplete.vim'
 
 Plugin 'sheerun/vim-polyglot'
 Plugin 'ap/vim-css-color'
@@ -383,9 +383,9 @@ set listchars=tab:\ \ ,eol:¬
 """""""""""""""""""""""""""""""""""""""""""
 
 set backspace=indent,eol,start
-set clipboard=unnamedplus
+set clipboard^=unnamed,unnamedplus
 if $TMUX == ''
-    set clipboard+=unnamedplus
+    set clipboard^=unnamed,unnamedplus
 endif
 "save
 inoremap ß <ESC>:w <CR>
