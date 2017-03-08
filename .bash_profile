@@ -66,6 +66,12 @@ function extract () {
     fi
 }
 
+#A function to automatically start ssh-agent and add identities on bash startup
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+    eval `ssh-agent -s`
+    ssh-add
+fi
+
 # Aliases
 # =====================
   # LS
@@ -86,10 +92,13 @@ function extract () {
   alias gacm="git add . && git commit -m"
   alias npmcbd="npm run clean && npm run devbuild"
   alias npmcb="npm run clean && npm run build"
-  
+  alias gco="git checkout"
+  alias bastion="ssh -L 3398:10.180.191.200:3389 -A cgonzalez26@csc-bastion.ckmnet.co"
+
+
 # Case-Insensitive Auto Completion
-  bind "set completion-ignore-case on" 
-  
+bind "set completion-ignore-case on"
+
 # added by Anaconda2 4.2.0 installer
 export PATH="/Users/cgonzalez/anaconda/bin:$PATH"
 export PATH="/USERS/cgonzalez/local/bin:$PATH"

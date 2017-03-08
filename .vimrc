@@ -16,7 +16,6 @@ if $TERM == "xterm-256color"
     set t_Co=256
 endif
 
-
 if $TERM == "screen"
     set t_Co=256
 endif
@@ -24,9 +23,10 @@ endif
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'christoomey/vim-tmux-navigator'
+" Plugin 'christoomey/vim-system-copy'
 Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'Syntastic'
+" Plugin 'Syntastic'
 Plugin 'Vim-R-plugin'
 Plugin 'vimux'
 "Plugin 'Lokaltog/vim-powerline'
@@ -64,7 +64,7 @@ Plugin 'tpope/vim-endwise'
 
 
 " Track the engine.
-Plugin 'SirVer/ultisnips'
+"Plugin 'SirVer/ultisnips'
 
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
@@ -383,10 +383,7 @@ set listchars=tab:\ \ ,eol:¬
 """""""""""""""""""""""""""""""""""""""""""
 
 set backspace=indent,eol,start
-set clipboard^=unnamed,unnamedplus
-if $TMUX == ''
-    set clipboard^=unnamed,unnamedplus
-endif
+set clipboard=unnamed
 "save
 inoremap ß <ESC>:w <CR>
 
