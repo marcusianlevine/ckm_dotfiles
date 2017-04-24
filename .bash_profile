@@ -9,9 +9,9 @@
     local   BLUE="\[\e[0;49;34m\]"
 
     # ♥ ☆ - Keeping some cool ASCII Characters for reference
-
+    
     # Here is where we actually export the PS1 Variable which stores the text for your prompt
-    export PS1="\[\e]2;\u@\h\a[\[\e[37;44;1m\]\t\[\e[0m\]]$RED\$(parse_git_branch) \[\e[32m\]\W\[\e[0m\]\n\[\e[0;31m\]$BLUE//$RED $CHAR \[\e[0m\]"
+    export PS1="\[\e]2;\u@\h\a[\[\e[37;44;1m\]\t\[\e[0m\]]$RED\$(parse_git_branch) \[\e[32m\]\W\[\e[0m\]\n\[\e[0;31m\]\[\e[35m\]☆\[\e[m\] $RED $CHAR \[\e[0m\]"
       PS2='> '
       PS4='+ '
     }
@@ -67,10 +67,15 @@ function extract () {
 }
 
 #A function to automatically start ssh-agent and add identities on bash startup
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-    eval `ssh-agent -s`
-    ssh-add
-fi
+function sshkeyring {
+  for possiblekey in ${HOME}/.ssh/id_*; do
+      if grep -q PRIVATE "$possiblekey"; then
+          ssh-add "$possiblekey"
+      fi
+  done
+}
+
+sshkeyring
 
 # Aliases
 # =====================
@@ -93,7 +98,10 @@ fi
   alias npmcbd="npm run clean && npm run devbuild"
   alias npmcb="npm run clean && npm run build"
   alias gco="git checkout"
-  alias bastion="ssh -L 3398:10.180.191.200:3389 -A cgonzalez26@csc-bastion.ckmnet.co"
+  alias bastion="ssh-agent && ssh-add ~/.ssh/iq-toolkit-test.pem && ssh -L 3398:10.180.191.200:3389 -A cgonzalez26@csc-bastion.ckmnet.co"
+  alias recruitment="ssh -L 8080:10.39.40.163:443 ubuntu@recruit.ckmnet.co"
+
+
 
 
 # Case-Insensitive Auto Completion
